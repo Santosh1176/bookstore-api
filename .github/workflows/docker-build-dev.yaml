@@ -19,10 +19,10 @@ jobs:
           #BRANCH=${GITHUB_REF##*/}
           #TS=$(date +%s)
           #REVISION=${GITHUB_SHA::8}
-          #BUILD_ID="${BRANCH}-${REVISION}-${TS}"
+          echo "BUILD_ID='${BRANCH}-${REVISION}-${TS}'" >> ${GITHUB_ENV}
           #LATEST_ID=canary
           #if [[ $GITHUB_REF == refs/tags/* ]]; then
-          echo "BUILD_ID=${branch}-${sha}-${ts}" >> ${GITHUB_ENV}
+          #echo "BUILD_ID=${branch}-${sha}-${ts}" >> ${GITHUB_ENV}
           #LATEST_ID=latest
           #fi
           #echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> ${GITHUB_ENV}
