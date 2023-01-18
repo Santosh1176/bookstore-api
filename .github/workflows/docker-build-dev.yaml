@@ -9,8 +9,6 @@ on:
 
 jobs:
   docker:
-    env:
-      IMAGE: Santosh1176/any_old_app
     runs-on: ubuntu-latest
     steps:
       - name: Prepare
