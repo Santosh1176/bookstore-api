@@ -1,6 +1,8 @@
 # Bookstore-api
 
-This is my DevOps project containing a simple REST API built with Go and a Postgres database bot deployed on a Kubernetes Kind test cluster. It also containes a frontend built with Go templates giving access to the bookstore database stored inthe Postgres db. The service is currently accessible through Nodeport i.e `<node IP>:<service port>/books` and the data is not persistant.
+This is my **WIP** DevOps project containing a simple REST API built with Go and a Postgres database bot deployed on a Kubernetes Kind test cluster. It also containes a frontend built with Go templates giving access to the bookstore database stored inthe Postgres db.
+
+The frontend and the backend of the application with all its dependencies are deployed on a namespace called `frontend-api` and the database with its dependencies and envVars are deployed in a different namespace namely `database`. The service is currently accessible through Nodeport i.e `<node IP>:<service port>/books` and the data is not persistant.
 
 ## TODO
 
@@ -10,4 +12,8 @@ This is my DevOps project containing a simple REST API built with Go and a Postg
 - Deploy the application using Ansible/Terraform on AWS-EKS/GCP-GKE cluster.
 - Apply GitOps functionality to the cluster. 
 - Apply monitoring and logging functionality.
+- Remove static env Vars in Go application and make it receive the vars from the *configMap*.
 - Add more functionality and styling to the Go Apllication.
+
+
+*If you somehow happen to pass by this repo and would like to make a suggestion, add some fuctionality to it or find something which is not handled appropriatly by me, please feel to raise a PR or an Issue. I would be always happy to receive valuable inputs from you.*
