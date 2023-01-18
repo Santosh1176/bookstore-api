@@ -10,7 +10,7 @@ on:
 jobs:
   docker:
     env:
-      IMAGE: santoshdts/bookstore-api
+      IMAGE: santoshdts/bookstore
     runs-on: ubuntu-latest
     steps:
       - name: Prepare
