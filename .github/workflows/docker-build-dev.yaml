@@ -22,7 +22,7 @@ jobs:
           #BUILD_ID="${BRANCH}-${REVISION}-${TS}"
           #LATEST_ID=canary
           #if [[ $GITHUB_REF == refs/tags/* ]]; then
-          echo "BUILD_ID=${branch}-${sha}-${ts}" >> ${BUILD_ID}
+          echo "BUILD_ID=${branch}-${sha}-${ts}" >> ${GITHUB_ENV}
           #LATEST_ID=latest
           #fi
           #echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> ${GITHUB_ENV}
