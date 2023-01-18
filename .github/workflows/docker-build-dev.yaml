@@ -19,7 +19,7 @@ jobs:
           BRANCH=${GITHUB_REF##*/}
           TS=$(date +%s)
           REVISION=${GITHUB_SHA::8}
-          echo BUILD_ID="${BRANCH}-${REVISION}-${TS}" >> ${GITHUB_ENV}
+          echo BUILD_ID=${BRANCH}-${REVISION}-${TS} >> ${GITHUB_ENV}
                     
 
       - name: Set up QEMU
