@@ -21,13 +21,13 @@ jobs:
           #REVISION=${GITHUB_SHA::8}
           #BUILD_ID="${BRANCH}-${REVISION}-${TS}"
           #LATEST_ID=canary
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
-            BUILD_ID=${GITHUB_REF/refs\/tags\//}
-            LATEST_ID=latest
-          fi
-          echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> ${GITHUB_ENV}
-          echo "BUILD_ID=${BUILD_ID}" >> ${GITHUB_ENV}
-          echo "LATEST_ID=${LATEST_ID}" >> ${GITHUB_ENV}          
+          #if [[ $GITHUB_REF == refs/tags/* ]]; then
+          echo "BUILD_ID=${branch}-${sha}-${ts}" >> ${BUILD_ID}
+          #LATEST_ID=latest
+          #fi
+          #echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> ${GITHUB_ENV}
+          #echo "BUILD_ID=${BUILD_ID}" >> ${GITHUB_ENV}
+          #echo "LATEST_ID=${LATEST_ID}" >> ${GITHUB_ENV}          
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -49,7 +49,7 @@ jobs:
           push: true
           tags: |
             ${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
-            ${{ env.IMAGE }}:${{ steps.prep.outputs.LATEST_ID }}            
+            #${{ env.IMAGE }}:${{ steps.prep.outputs.LATEST_ID }}            
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
