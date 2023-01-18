@@ -16,12 +16,12 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          BRANCH=${GITHUB_REF##*/}
-          TS=$(date +%s)
-          REVISION=${GITHUB_SHA::8}
-          BUILD_ID="${BRANCH}-${REVISION}-${TS}"
-          LATEST_ID=canary
-          #if [[ $GITHUB_REF == refs/tags/* ]]; then
+          echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "TS=$(date +%s)" >> $GITHUB_ENV
+          echo "REVISION=${GITHUB_SHA::8}" >> $GITHUB_ENV
+          echo "BUILD_ID='${BRANCH}-${REVISION}-${TS}'" >> $GITHUB_ENV
+          echo "LATEST_ID=canary" >> $GITHUB_ENV
+          #if [[ $GITHUB_REF == refs/tags/* ]]; then" >> $GITHUB_ENV
           #  BUILD_ID=${GITHUB_REF/refs\/tags\//}
           #  LATEST_ID=latest
           #fi
