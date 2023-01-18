@@ -10,7 +10,7 @@ on:
 jobs:
   docker:
     env:
-      IMAGE: kingdonb/any_old_app
+      IMAGE: santoshdts/bookstore
     runs-on: ubuntu-latest
     steps:
       - name: Prepare
