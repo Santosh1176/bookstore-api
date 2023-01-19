@@ -6,10 +6,10 @@ resources:
   - frontend-secret.yaml
   - frontend-svc.yaml
   - ingress.yaml
-  - postgres-cm.yaml
-  - postgres-headless-svc.yaml
-  - postgres-secret.yaml
-  - postgres-sts.yaml
-  - postgres-svc.yaml
-  - pv.yaml
-  - pvc.yaml
+  - ./db/postgres-cm.yaml
+  - ./db/postgres-headless-svc.yaml
+  - ./db/postgres-secret.yaml
+  - ./db/postgres-sts.yaml
+  - ./db/postgres-svc.yaml
+  - ./db/pv.yaml
+  - ./db/pvc.yaml
