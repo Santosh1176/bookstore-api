@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  dbHost: postgres-0.postgres.database.svc.cluster.local:5432 
+  dbName: bookstore
+  sslMode: disable
+kind: ConfigMap
+metadata:
+  name: frontend-cm
+  namespace: frontend-api
