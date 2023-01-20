@@ -19,7 +19,7 @@ spec:
       containers:
       - image: docker.io/santoshdts/bookstore:main-ff2693ef-1674224585  # {"$imagepolicy": "flux-system:bookstore"}
         name: bookstore
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - name: http
           containerPort: 8080
