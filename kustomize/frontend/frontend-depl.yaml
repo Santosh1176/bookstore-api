@@ -17,7 +17,7 @@ spec:
         app: bookstore-frontend
     spec:
       containers:
-      - image: docker.io/santoshdts/bookstore:latest  # {"$imagepolicy": "flux-system:bookstore"}
+      - image: docker.io/santoshdts/bookstore  # {"$imagepolicy": "flux-system:bookstore"}
         name: bookstore
         imagePullPolicy: IfNotPresent
         ports:
