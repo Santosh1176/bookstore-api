@@ -1,0 +1,19 @@
+resources:
+  - ../../base/
+  
+patches:
+  - patch: |-
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: postgres 
+        namespace: database
+        labels:
+          app: postgres 
+      spec:
+        ports:
+          - port: 5432
+        selector:
+          app: bookstore
+        clusterIP: None
+
