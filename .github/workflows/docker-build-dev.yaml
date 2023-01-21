@@ -20,10 +20,8 @@ jobs:
           TS=$(date +%s)
           REVISION=${GITHUB_SHA::8}
           BUILD_ID="${BRANCH}-${REVISION}-${TS}"
-          LATEST_ID=canary
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             BUILD_ID=${GITHUB_REF/refs\/tags\//}
-            LATEST_ID=latest
           fi
           echo ::set-output name=BUILD_DATE::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           echo ::set-output name=BUILD_ID::${BUILD_ID}
