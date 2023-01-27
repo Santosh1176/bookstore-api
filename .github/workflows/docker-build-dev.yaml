@@ -58,7 +58,7 @@ jobs:
       - name: Sign inage with cosign
         run: |
           echo "$COSIGN_KEY" > /tmp/cosign.key
-          cosign sign -key /tmp/cosign.key docker.io/${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
+          cosign sign --key /tmp/cosign.key docker.io/${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
