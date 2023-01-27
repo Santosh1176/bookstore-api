@@ -47,14 +47,15 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
 
-      # Signing built image with Cosign
       - name: Sign config artifact
+        uses: sigstore/cosign-installer@main
+        with:
+          cosign-release: 'v1.13.1'
+          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
+          COSIGN_KEY: ${{secrets.COSIGN_KEY}}
         run: |
           echo "$COSIGN_KEY" > /tmp/cosign.key
           cosign sign -key /tmp/cosign.key docker.io/${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
-        env:
-          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
-          COSIGN_KEY: ${{secrets.COSIGN_KEY}}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
