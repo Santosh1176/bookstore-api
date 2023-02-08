@@ -50,14 +50,14 @@ jobs:
       
       - name: Install cosign
         uses: sigstore/cosign-installer@main
-        with:
-          cosign-release: 'v1.13.1'
-          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
 
-      - name: Sign inage with cosign
+      - name: Sign image with a key
         run: |
-          echo "$COSIGN_KEY" > /tmp/cosign.key
-          cosign sign --key /tmp/cosign.key docker.io/${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
-
+          cosign sign --key env://COSIGN_PRIVATE_KEY ${TAGS}
+        env:
+          TAGS: ${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
+          COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
+          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
+    
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
