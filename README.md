@@ -6,14 +6,20 @@ The frontend and the backend of the application with all its dependencies are de
 
 ## TODO
 
+- [x] Apply GitOps functionality to the cluster. 
+- [x] Automate scanning and signing of build artefacts using syft and cosign. 
+- Create an Helm Chart for the application
+- Apply monitoring and logging functionality.
+    **Tools to work with**
+    - Prometheus
+    - Grafana
+    - OpenTelemetry
+    - Jaeger
 - Make the service availavble via `Kubernetes Ingress`
 - Make the Data persistant using `volumeClaimTemplates` some different `persistantVolume` type, referring to this [article on Kubernetes docs](https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/)
-- Create an Helm Chart for the application
 - Deploy the application using Ansible/Terraform on AWS-EKS/GCP-GKE cluster.
-- Apply GitOps functionality to the cluster. 
-- Apply monitoring and logging functionality.
 - Remove static env Vars in Go application and make it receive the vars from the *configMap*.
 - Add more functionality and styling to the Go Apllication.
 
 
-*If you somehow happen to pass by this repo and would like to make a suggestion, add some fuctionality to it or find something which is not handled appropriatly by me, please feel to raise a PR or an Issue. I would be always happy to receive valuable inputs from you.*
+*If you somehow happen to pass by this repo and would like to make a suggestion, add some fuctionality to it or find something which is not handled appropriatly by me, please feel to file an issue or raise a PR. I would be happy to receive valuable inputs from you.*
