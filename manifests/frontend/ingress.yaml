@@ -5,7 +5,8 @@ metadata:
   namespace: frontend-api
 spec:
   rules:
-  - http:
+  - hosts: "app.santoshdts.com"
+    http:
       paths:
       - pathType: Prefix
         path: "/books"
