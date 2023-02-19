@@ -3,9 +3,12 @@ kind: Ingress
 metadata:
   name: bookstore-ingress
   namespace: frontend-api
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - http:
+  - hosts: "app.santoshdts.com"
+    http:
       paths:
       - pathType: Prefix
         path: "/books"
