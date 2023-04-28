@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  name: postgres  
+  namespace: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookstore
+  serviceName: "postgres"
+  template:
+    metadata:
+      labels:
+        app: bookstore
+    spec:
+      containers:
+      - name: postgres
+        image: docker.io/bitnami/postgresql:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.backendEnv.secretName }}
+              key: dbPassword
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.backendEnv.secretName }}
+              key: dbUser 
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.backendEnv.cmName }}
+              key: POSTGRES_DB
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgredb
+      volumes:
+      - name: postgredb
+        persistentVolumeClaim:
+          claimName: bookstore-pv-claim
+
