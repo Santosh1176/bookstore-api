@@ -6,7 +6,7 @@ The frontend and the backend of the application with all its dependencies are de
 
 ## TODO
 
-- [x] Apply GitOps functionality to the cluster. 
+- [x] Apply GitOps functionality to the application for [CI with GitHub Actions and CD with Flux](https://santoshdts.hashnode.dev/a-step-by-step-guide-to-gitops-with-github-actions-and-flux2-including-a-hands-on-demo). 
 - [x] Automate scanning and signing of build artefacts using syft and cosign. 
 - [x] Create an Helm Chart for the application
 - [x] Make the service availavble via `Kubernetes Ingress`
