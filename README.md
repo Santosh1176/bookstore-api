@@ -10,12 +10,12 @@ The frontend and the backend of the application with all its dependencies are de
 - [x] Automate scanning and signing of build artefacts using syft and cosign. 
 - [x] Create an Helm Chart for the application
 - [x] Make the service availavble via `Kubernetes Ingress`
+- [x] Maintains data persistance after node reboots. Currently, I've used `hostPath` in Persistant Volumes mounted to StatefulSet, which is not reccomended practice for production clusters.
 - Apply monitoring and observability.
     **Tools to work with**
     - Implement EFK stack
     - Instrument OpenTelemetry
     
-- Make the Data persistant using `volumeClaimTemplates` some different `persistantVolume` type, referring to this [article on Kubernetes docs](https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/)
 - Remove static env Vars in Go application and make it receive the vars from the *configMap*.
 - Deploy the application using Ansible/Terraform on AWS-EKS/GCP-GKE cluster.
 - Add more functionality and styling to the Go Apllication.
