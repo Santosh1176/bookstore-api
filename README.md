@@ -11,13 +11,13 @@ The frontend and the backend of the application with all its dependencies are de
 - [x] Create an Helm Chart for the application
 - [x] Make the service available via `Kubernetes Ingress`
 - [x] Maintains data persistance after node reboots. Currently, I've used `hostPath` in Persistant Volumes mounted to StatefulSet, which is not reccomended practice for production clusters. *Create the `/data/psql` directory on host node.*
-- Apply monitoring and observability.
+- [ ] Apply monitoring and observability.
     **Tools to work with**
     - Implement EFK stack
     - Instrument OpenTelemetry
     
-- Remove static env Vars in Go application and make it receive the vars from the *configMap/secret*.
-- Add more functionality and styling to the Go Apllication.
+- [ ] Remove static env Vars in Go application and make it receive the vars from the *configMap/secret*.
+- [ ] Add more functionality and styling to the Go Apllication.
 
 
-*If you somehow happen to pass by this repo and would like to make a suggestion, add some fuctionality to it or find something which is not handled appropriatly by me, please feel to file an issue or raise a PR. I would be happy to receive valuable inputs from you.*
+*If you somehow happen to pass by this repo and would like to make a suggestion, add some fuctionality to it or find something which is not handled appropriatly by me, please feel to file an issue or raise a PR. I would be happy to receive valuable inputs from you.
