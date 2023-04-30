@@ -9,15 +9,14 @@ The frontend and the backend of the application with all its dependencies are de
 - [x] Apply GitOps functionality to the application for [CI with GitHub Actions and CD with Flux](https://santoshdts.hashnode.dev/a-step-by-step-guide-to-gitops-with-github-actions-and-flux2-including-a-hands-on-demo). 
 - [x] Automate scanning and signing of build artefacts using syft and cosign. 
 - [x] Create an Helm Chart for the application
-- [x] Make the service availavble via `Kubernetes Ingress`
+- [x] Make the service available via `Kubernetes Ingress`
 - [x] Maintains data persistance after node reboots. Currently, I've used `hostPath` in Persistant Volumes mounted to StatefulSet, which is not reccomended practice for production clusters. *Create the `/data/psql` directory on host node.*
 - Apply monitoring and observability.
     **Tools to work with**
     - Implement EFK stack
     - Instrument OpenTelemetry
     
-- Remove static env Vars in Go application and make it receive the vars from the *configMap*.
-- Deploy the application using Ansible/Terraform on AWS-EKS/GCP-GKE cluster.
+- Remove static env Vars in Go application and make it receive the vars from the *configMap/secret*.
 - Add more functionality and styling to the Go Apllication.
 
 
