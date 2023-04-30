@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bookstore-frontend
+  name: bookstore-frontend
+  namespace: frontend-api
+spec:
+  replicas: {{.Values.replicas }}
+  selector:
+    matchLabels:
+      app: bookstore-frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: bookstore-frontend
+    spec:
+      containers:
+      - image: docker.io/santoshdts/bookstore:main-dd44536a-1676804192
+        name: bookstore
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8080
+        env:
+          - name: POSTGRES_SSLMODE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.frontendEnv.cmName }}
+                key: sslMode
+          - name: POSTGRES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.frontendEnv.cmName }}
+                key: dbHost
+          - name: POSTGRES_DB
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.frontendEnv.cmName }}
+                key: dbName
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.frontendEnv.secretName }}
+                key: dbUser
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: frontend-secret
+                key: dbPassword
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+status: {}
