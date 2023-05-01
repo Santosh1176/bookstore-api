@@ -27,7 +27,6 @@
     </style>
 </head>
 <body>
-<h3>Version: {{.Commit}}</h3>
 {{range .}}
 <p><a href="/books/show?isbn={{.Isbn}}">{{.Isbn}}</a> - {{.Title}} - {{.Author}} - {{.Price}} - <a href="/books/update?isbn={{.Isbn}}">update</a>  - <a href="/books/delete/process?isbn={{.Isbn}}">delete</a> </p>
 {{end}}

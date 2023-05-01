@@ -10,7 +10,7 @@ The frontend and the backend of the application with all its dependencies are de
 - [x] Automate scanning and signing of build artefacts using syft and cosign. 
 - [x] Create an Helm Chart for the application
 - [x] Make the service available via `Kubernetes Ingress`
-- [x] Maintains data persistance after node reboots. Currently, I've used `hostPath` in Persistant Volumes mounted to StatefulSet, which is not reccomended practice for production clusters.
+- [x] Maintains data persistance after node reboots. Currently, I've used `hostPath` in Persistant Volumes mounted to StatefulSet, which is not reccomended practice for production clusters. *Create the `/data/psql` directory on host node.*
 - [ ] Apply monitoring and observability.
     **Tools to work with**
     - Implement EFK stack

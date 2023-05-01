@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"runtime/debug"
 	"strconv"
 
 	_ "github.com/lib/pq"
@@ -189,18 +188,6 @@ func booksUpdateForm(w http.ResponseWriter, r *http.Request) {
 	}
 	tpl.ExecuteTemplate(w, "update.gohtml", bk)
 }
-
-var Commit = func() string {
-	if info, ok := debug.ReadBuildInfo(); ok {
-		for _, setting := range info.Settings {
-			if setting.Key == "vcs.revision" {
-				return setting.Value
-			}
-		}
-	}
-
-	return ""
-}()
 
 func booksUpdateProcess(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {

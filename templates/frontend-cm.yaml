@@ -1,9 +1,0 @@
-apiVersion: v1
-data:
-  dbHost: {{ .Values.frontendCM.dbHost }}
-  dbName: bookstore
-  sslMode: disable
-kind: ConfigMap
-metadata:
-  name: frontend-cm
-  namespace: frontend-api
