@@ -58,6 +58,9 @@ jobs:
           TAGS: ${{ steps.prep.outputs.BUILD_ID }}
           COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
     
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
