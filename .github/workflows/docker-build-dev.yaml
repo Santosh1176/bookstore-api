@@ -53,7 +53,7 @@ jobs:
       - id: docker_meta
         uses: docker/metadata-action@v3.6.0
         with:
-          images: docker.io/santoshdts/bookstore
+          images: santoshdts/bookstore
           tags: type=sha,format=long
 
       - name: Sign image with a key
