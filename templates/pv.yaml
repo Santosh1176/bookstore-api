@@ -1,0 +1,32 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  namespace: database 
+  name: bookstore-pv-volume  
+  labels:
+    type: local  
+    app: bookstore
+spec:
+  storageClassName: standard
+  capacity:
+    storage: {{ .Values.storage.capacity }}
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/psql"
+    type: DirectoryOrCreate
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: database
+  name: bookstore-pv-claim  
+  labels:
+    app: bookstore
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteMany  
+  resources:
+    requests:
+      storage: {{ .Values.storage.capacity }}  
