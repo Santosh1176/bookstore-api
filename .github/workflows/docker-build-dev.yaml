@@ -50,6 +50,11 @@ jobs:
       
       - name: Install cosign
         uses: sigstore/cosign-installer@main
+      - id: docker_meta
+        uses: docker/metadata-action@v3.6.0
+        with:
+          images: docker.io/santoshdts/bookstore
+          tags: type=sha,format=long
 
       - name: Sign image with a key
         run: |
