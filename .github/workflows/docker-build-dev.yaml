@@ -55,7 +55,7 @@ jobs:
         run: |
           cosign sign --key env://COSIGN_PRIVATE_KEY ${TAGS}
         env:
-          TAGS: ${{ steps.prep.outputs.BUILD_ID }}
+          TAGS: ${{ env.IMAGE }}:${{ steps.prep.outputs.BUILD_ID }}
           COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
