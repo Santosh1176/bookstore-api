@@ -53,14 +53,14 @@ jobs:
       - id: docker_meta
         uses: docker/metadata-action@v3.6.0
         with:
-          images: santoshdts/bookstore
+          images: docker.io/santoshdts/bookstore
           tags: type=sha,format=long
 
       - name: Sign image with a key
         run: |
           cosign sign --key env://COSIGN_PRIVATE_KEY ${TAGS}
         env:
-          TAGS: ${{ steps.docker_meta.outputs.tags }}
+          TAGS: ${{ steps.docker_build.outputs.digest }}
           COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
