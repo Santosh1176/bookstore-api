@@ -55,16 +55,17 @@ jobs:
         with:
           images: docker.io/santoshdts/bookstore
           tags: type=sha,format=long
+          
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
 
       - name: Sign image with a key
         run: |
           cosign sign --key env://COSIGN_PRIVATE_KEY ${TAGS}
         env:
-          TAGS: ${{ steps.docker_build.outputs.digest }}
+          TAGS: docker.io/santoshdts/bookstore:${{ steps.docker_build.outputs.digest }}
           COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
     
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
