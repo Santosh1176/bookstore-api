@@ -43,15 +43,10 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.GHCR_USER }}
           password: ${{ secrets.GHCR_PAT }}
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - name: Build and push Docker image
-        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-        with:
-          context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: |
+            ${{ env.IMAGE }}:latest
