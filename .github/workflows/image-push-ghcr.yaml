@@ -43,10 +43,32 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.GHCR_USER }}
           password: ${{ secrets.GHCR_PAT }}
-      - name: Build and push
-        id: docker_build
+      - name: Prepare
+        id: prep
+        run: |
+          VERSION=sha-${GITHUB_SHA::8}
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF/refs\/tags\//}
+          fi
+          echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+          echo "REVISION=${GITHUB_SHA}" >> $GITHUB_OUTPUT
+      - name: Generate images meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            docker.io/santoshdts/bookstore
+            ghcr.io/santosh1176/bookstore
+          tags: |
+            type=raw,value=${{ steps.prep.outputs.VERSION }}
+            type=raw,value=latest
+      - name: Publish base image
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: |
-            ${{ env.IMAGE }}:${{ steps.prep.outputs.LATEST_ID }}
+          builder: ${{ steps.buildx.outputs.name }}
+          context: .
+          platforms: linux/amd64
+          file: ./Dockerfile
+          tags: ghcr.io/santosh1176/bookstore:latest
