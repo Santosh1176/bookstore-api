@@ -38,16 +38,6 @@ jobs:
           echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
           echo "REVISION=${GITHUB_SHA}" >> $GITHUB_OUTPUT
-      - name: Generate images meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: |
-            docker.io/santoshdts/bookstore
-            ghcr.io/santosh1176/bookstore
-          tags: |
-            type=raw,value=${{ steps.prep.outputs.VERSION }}
-            type=raw,value=latest
       - name: Publish base image
         uses: docker/build-push-action@v3
         with:
