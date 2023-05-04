@@ -16,8 +16,10 @@ spec:
       labels:
         app: bookstore-frontend
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
-      - image: docker.io/santoshdts/bookstore
+      - image: ghcr.io/santosh1176/bookstore:latest
         name: bookstore
         imagePullPolicy: Always
         ports:
