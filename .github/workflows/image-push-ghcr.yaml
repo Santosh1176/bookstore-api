@@ -24,6 +24,7 @@ jobs:
           TS=$(date +%s)
           REVISION=${GITHUB_SHA::8}
           BUILD_ID="${REVISION}-${TS}"
+          LATEST_ID=latest
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             BUILD_ID=${GITHUB_REF/refs\/tags\//}
           fi
