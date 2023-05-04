@@ -16,21 +16,6 @@ jobs:
       IMAGE_NAME: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
-      - uses: fluxcd/flux2/action@main
-      - name: Prepare
-        id: prep
-        run: |
-          BRANCH=${GITHUB_REF##*/}
-          TS=$(date +%s)
-          REVISION=${GITHUB_SHA::8}
-          BUILD_ID="${BRANCH}-${REVISION}-${TS}"
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
-            BUILD_ID=${GITHUB_REF/refs\/tags\//}
-          fi
-          echo ::set-output name=BUILD_DATE::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          echo ::set-output name=BUILD_ID::${BUILD_ID}
-          echo ::set-output name=LATEST_ID::${LATEST_ID}          
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
