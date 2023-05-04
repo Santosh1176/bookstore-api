@@ -15,19 +15,18 @@ spec:
   hostPath:
     path: "/data/psql"
     type: DirectoryOrCreate
-#---
-#kind: PersistentVolumeClaim
-#apiVersion: v1
-#metadata:
-#  namespace: database
-#  name: bookstore-pv-claim  
-#  labels:
-#    app: bookstore
-#spec:
-#  storageClassName: standard
-#  accessModes:
-#    - ReadWriteMany  
-#  resources:
-#    requests:
-#      storage: 1Gi  
-#
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: database
+  name: bookstore-pv-claim  
+  labels:
+    app: bookstore
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteMany  
+  resources:
+    requests:
+      storage: 1Gi  

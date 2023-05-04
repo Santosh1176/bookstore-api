@@ -5,7 +5,7 @@ metadata:
   namespace: frontend-api
 spec:
   rules:
-  - hosts: "app.santoshdts.com"
+  - host: "app.santoshdts.com"
     http:
       paths:
       - pathType: Prefix

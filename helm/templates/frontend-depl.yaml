@@ -17,7 +17,7 @@ spec:
         app: bookstore-frontend
     spec:
       containers:
-      - image: docker.io/santoshdts/bookstore:main-9694d2b7-1682864276
+      - image: docker.io/santoshdts/bookstore:main-32764c86-1682947552
         name: bookstore
         imagePullPolicy: Always
         ports:
