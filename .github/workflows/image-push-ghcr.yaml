@@ -15,6 +15,7 @@ jobs:
       IMAGE: santoshdts/bookstore
     runs-on: ubuntu-latest
     steps:
+      - uses: fluxcd/flux2/action@main
       - name: Prepare
         id: prep
         run: |
