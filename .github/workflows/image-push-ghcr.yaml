@@ -39,7 +39,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secret.GHCR_PAT}}
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Build and push
         id: docker_build
