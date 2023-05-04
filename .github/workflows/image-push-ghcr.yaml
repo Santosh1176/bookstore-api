@@ -1,4 +1,4 @@
-name: Docker Build, Push
+name: GHCR Build, Push
 
 on:
   push:
@@ -11,6 +11,9 @@ permissions:
 
 jobs:
   docker:
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
       - uses: fluxcd/flux2/action@main
@@ -37,14 +40,18 @@ jobs:
       - name: Login to github container registry
         uses: docker/login-action@v2
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ secrets.GHCR_USER }}
           password: ${{ secrets.GHCR_PAT }}
-
-      - name: Publish Flux OCI artifact to GHCR
-        run: |
-          flux push artifact oci://ghcr.io/santosh1176/bookstore-api/bookstore:${{ steps.prep.outputs.BUILD_ID }} \
-            --path="./kustomize" \
-            --source="${{ github.event.repository.html_url }}" \
-            --revision="${GITHUB_REF_NAME}/${GITHUB_SHA}"
-          flux tag artifact oci://ghcr.io/santosh1176/bookstore-api/bookstore:${{ steps.prep.outputs.BUILD_ID }} --tag latest
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
