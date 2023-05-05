@@ -17,6 +17,7 @@ jobs:
       contents: read
       packages: write
     steps:
+      - uses: fluxcd/flux2/action@main
       - name: Prepare
         id: prep
         run: |
@@ -52,6 +53,15 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ steps.prep.outputs.LATEST_ID }}
+      
+      - name: Publish Flux OCI artifact to GHCR
+        id: Push_Artifact
+        run: |
+          flux push artifact oci://ghcr.io/santosh1176/manifests/bookstore:${{ steps.prep.outputs.VERSION }} \
+            --path="./kustomize" \
+            --source="${{ github.event.repository.html_url }}" \
+            --revision="${GITHUB_REF_NAME}/${GITHUB_SHA}"
+          flux tag artifact oci://ghcr.io/santosh1176/manifests/bookstore:${{ steps.prep.outputs.VERSION }} --tag latest
       
       
       - name: Image digest

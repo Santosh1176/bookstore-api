@@ -1,5 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./db
-  - ./frontend
+- db/db-ns.yaml
+- db/postgres-cm.yaml
+- db/postgres-headless-svc.yaml
+- db/postgres-secret.yaml
+- db/postgres-statefulset.yaml
+- db/postgres-svc.yaml
+- db/pv.yaml
+- frontend/frontend-cm.yaml
+- frontend/frontend-depl.yaml
+- frontend/frontend-ns.yaml
+- frontend/frontend-secret.yaml
+- frontend/frontend-svc.yaml
+- frontend/ingress.yaml
