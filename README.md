@@ -11,8 +11,8 @@ The frontend and the backend of the application with all its dependencies are de
 - [x] Create an Helm Chart for the application
 - [x] Make the service available via `Kubernetes Ingress`
 - [x] Maintains data persistance after node reboots. Currently, I've used `hostPath` in Persistant Volumes mounted to StatefulSet, which is not reccomended practice for production clusters.
-- [x] Apply GitOps automation levereging ociRepository for storing all the relevant artifacts like images, deployment configs (kustomize and helm charts, cosign signatures in an oci compliant registrt (ghcr.io in this case) and reconsiling the cluster state with the ociRepository.
-    - [ ] A blog on hands on published at Hashnode.
+- [x] Apply GitOps automation levereging Flux `OCIRepository` and `Kustomization` for storing all the relevant artifacts like images, deployment configs (kustomize and helm charts), cosign signatures, SBOM's, Kyverno/OPA policies,etc in an oci compliant registry (ghcr.io in this case) and reconciling the cluster state with the `OCIRepository` and `Kustomization` Flux controllers.
+    - [ ] A blog on hands demo about the subject published at Hashnode.
 - [ ] Apply monitoring and observability.
     **Tools to work with**
     - Implement EFK stack
