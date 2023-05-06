@@ -61,9 +61,6 @@ func main() {
 func index(w http.ResponseWriter, r *http.Request) {
 	var commitSHA string
 	tpl.ExecuteTemplate(w, "index.gohtml", commitSHA)
-
-	http.Redirect(w, r, "/books", http.StatusSeeOther)
-
 }
 
 func booksIndex(w http.ResponseWriter, r *http.Request) {
