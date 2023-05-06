@@ -1,5 +1,7 @@
 FROM golang:1.19-alpine AS build
 
+RUN apk update && apk add --no-cache git
+
 WORKDIR /home
 
 COPY ./pkg .
