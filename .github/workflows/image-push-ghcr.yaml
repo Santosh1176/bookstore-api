@@ -19,6 +19,10 @@ jobs:
     steps:
       - uses: fluxcd/flux2/action@main
       - uses: actions/checkout@v3
+      - name: Set environment variable
+        run: |
+          COMMIT_SHA=$(git rev-parse --short HEAD)
+          echo "COMMIT_SHA=$COMMIT_SHA" >> $GITHUB_ENV
       - name: Prepare
         id: prep
         run: |
@@ -57,7 +61,7 @@ jobs:
         with:
           context: .
           build-args: |
-            COMMIT_SHA=${{ steps.set_commit_sha.outputs.COMMIT_SHA }}
+            COMMIT_SHA=${{ github.sha }}
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ steps.prep.outputs.LATEST_ID }}
