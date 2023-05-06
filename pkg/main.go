@@ -5,9 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os/exec"
 	"strconv"
-	"strings"
 
 	_ "github.com/lib/pq"
 )
@@ -61,24 +59,11 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
+	var commitSHA string
+	tpl.ExecuteTemplate(w, "index.gohtml", commitSHA)
 
-	commitSHA, err := getCommitSHA()
-	if err != nil {
-		http.Error(w, "Error retrieving commit SHA", http.StatusInternalServerError)
-		return
-	}
+	http.Redirect(w, r, "/books", http.StatusSeeOther)
 
-	data := struct {
-		CommitSHA string
-	}{
-		CommitSHA: commitSHA,
-	}
-	tpl.ExecuteTemplate(w, "index.gohtml", data)
-
-	err = tpl.Execute(w, data)
-	if err != nil {
-		return
-	}
 }
 
 func booksIndex(w http.ResponseWriter, r *http.Request) {
@@ -267,18 +252,4 @@ func booksDeleteProcess(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, "/books", http.StatusSeeOther)
-}
-
-func getCommitSHA() (string, error) {
-	cmd := exec.Command("git", "rev-parse", "--short", "HEAD")
-	output, err := cmd.Output()
-	if err != nil {
-		return "", err
-	}
-	// fmt.Printf("OUTPUT: %v", output)
-
-	commitSHA := strings.TrimSpace(string(output))
-	// fmt.Printf("COMMITSHA: %v", commitSHA)
-
-	return commitSHA, nil
 }

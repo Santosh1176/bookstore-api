@@ -1,7 +1,5 @@
 FROM golang:1.19-alpine AS build
 
-RUN apk update && apk add --no-cache git
-
 WORKDIR /home
 
 COPY ./pkg .
@@ -9,7 +7,7 @@ COPY ./pkg .
 
 RUN go mod download
 
-RUN  go build -o bookstore
+RUN  go build -o bookstore -ldflags "-X main.commitSHA=$COMMIT_SHA"
 
 EXPOSE 8080
 
