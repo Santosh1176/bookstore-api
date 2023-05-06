@@ -27,10 +27,11 @@ var db *sql.DB
 var tpl *template.Template
 
 type Books struct {
-	Isbn   string
-	Title  string
-	Author string
-	Price  float32
+	Isbn      string
+	Title     string
+	Author    string
+	Price     float32
+	CommitSHA string
 }
 
 func main() {
@@ -65,7 +66,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	data := struct {
 		CommitSHA string
 	}{
-		CommitSHA: commitSHA, // Use the commit SHA value you passed as a build argument
+		CommitSHA: commitSHA, // Use the commit SHA value passed as a build argument
 	}
 	fmt.Printf("COmmit SHA: %v", data.CommitSHA)
 
@@ -88,7 +89,7 @@ func booksIndex(w http.ResponseWriter, r *http.Request) {
 	bks := make([]Books, 0)
 	for rows.Next() {
 		bk := Books{}
-		err := rows.Scan(&bk.Isbn, &bk.Title, &bk.Author, &bk.Price)
+		err := rows.Scan(&bk.Isbn, &bk.Title, &bk.Author, &bk.Price, &bk.CommitSHA)
 		if err != nil {
 			http.Error(w, http.StatusText(500), 500)
 			return
