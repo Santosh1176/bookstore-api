@@ -46,6 +46,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
+      
+      - name: Set commit SHA
+        id: set_commit_sha
+        run: echo "::set-output name=COMMIT_SHA::$(git rev-parse --short HEAD)"
 
       - name: Build and push
         id: docker_build
