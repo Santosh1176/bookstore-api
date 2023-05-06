@@ -17,9 +17,9 @@ const (
 	DB_PASS = "dts123"
 	DB_NAME = "bookstore"
 	// Change to Localhost if testing on local DB build-1
-	// DB_HOST = "localhost"
+	DB_HOST = "localhost"
 	//for build-2 localhost is as below
-	DB_HOST  = "postgres-0.postgres.database.svc.cluster.local"
+	// DB_HOST  = "postgres-0.postgres.database.svc.cluster.local"
 	DB_PORT  = 5432
 	SSL_MODE = "disable"
 )
@@ -56,6 +56,7 @@ func main() {
 	http.HandleFunc("/books/update", booksUpdateForm)
 	http.HandleFunc("/books/update/process", booksUpdateProcess)
 	http.HandleFunc("/books/delete/process", booksDeleteProcess)
+	http.Handle("/image/", http.StripPrefix("/image", http.FileServer(http.Dir("./image"))))
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -73,18 +74,14 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}{
 		CommitSHA: commitSHA,
 	}
+	tpl.ExecuteTemplate(w, "index.gohtml", data)
 
-	tmpl, err := template.ParseFiles("books.gohtml")
+	err = tpl.Execute(w, data)
 	if err != nil {
-		http.Error(w, "Error parsing template", http.StatusInternalServerError)
 		return
 	}
+	http.Redirect(w, r, "/books", http.StatusSeeOther)
 
-	err = tmpl.Execute(w, data)
-	if err != nil {
-		http.Error(w, "Error executing template", http.StatusInternalServerError)
-		return
-	}
 }
 
 func booksIndex(w http.ResponseWriter, r *http.Request) {
@@ -276,12 +273,15 @@ func booksDeleteProcess(w http.ResponseWriter, r *http.Request) {
 }
 
 func getCommitSHA() (string, error) {
-	cmd := exec.Command("git", "rev-parse", "HEAD")
+	cmd := exec.Command("git", "rev-parse", "--short", "HEAD")
 	output, err := cmd.Output()
 	if err != nil {
 		return "", err
 	}
+	// fmt.Printf("OUTPUT: %v", output)
 
 	commitSHA := strings.TrimSpace(string(output))
+	// fmt.Printf("COMMITSHA: %v", commitSHA)
+
 	return commitSHA, nil
 }
