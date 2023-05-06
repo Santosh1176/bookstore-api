@@ -60,7 +60,12 @@ func main() {
 
 func index(w http.ResponseWriter, r *http.Request) {
 	var commitSHA string
-	tpl.ExecuteTemplate(w, "index.gohtml", commitSHA)
+	data := struct {
+		CommitSHA string
+	}{
+		CommitSHA: commitSHA, // Use the commit SHA value you passed as a build argument
+	}
+	tpl.ExecuteTemplate(w, "index.gohtml", data)
 }
 
 func booksIndex(w http.ResponseWriter, r *http.Request) {
