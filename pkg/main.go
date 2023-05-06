@@ -61,11 +61,14 @@ func main() {
 
 func index(w http.ResponseWriter, r *http.Request) {
 	commitSHA := os.Getenv("COMMIT_SHA")
+	fmt.Printf("COmmit SHA: %v", commitSHA)
 	data := struct {
 		CommitSHA string
 	}{
 		CommitSHA: commitSHA, // Use the commit SHA value you passed as a build argument
 	}
+	fmt.Printf("COmmit SHA: %v", data.CommitSHA)
+
 	tpl.ExecuteTemplate(w, "index.gohtml", data)
 }
 
