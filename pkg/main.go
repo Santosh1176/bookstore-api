@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 	"strconv"
 
 	_ "github.com/lib/pq"
@@ -59,7 +60,7 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	var commitSHA string
+	commitSHA := os.Getenv("COMMIT_SHA")
 	data := struct {
 		CommitSHA string
 	}{
