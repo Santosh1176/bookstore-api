@@ -2,6 +2,8 @@ FROM golang:1.19-alpine AS build
 
 WORKDIR /home
 
+ARG COMMIT_SHA
+
 COPY ./pkg .
 
 
