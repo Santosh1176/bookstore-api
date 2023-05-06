@@ -9,7 +9,7 @@ COPY ./pkg .
 
 RUN go mod download
 
-RUN  go build -o bookstore -ldflags "-X main.commitSHA=$COMMIT_SHA"
+RUN  go build -o bookstore -ldflags "-X main.commitSHA=$COMMIT_SHA" >> $GITHUB_ENV
 
 EXPOSE 8080
 

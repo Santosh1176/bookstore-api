@@ -60,7 +60,7 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	commitSHA := os.Getenv("COMMIT_SHA")
+	commitSHA := os.Getenv("COMMIT_SHA", true)
 	data := struct {
 		CommitSHA string
 	}{
