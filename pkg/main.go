@@ -17,9 +17,9 @@ const (
 	DB_PASS = "dts123"
 	DB_NAME = "bookstore"
 	// Change to Localhost if testing on local DB build-1
-	DB_HOST = "localhost"
+	// DB_HOST = "localhost"
 	//for build-2 localhost is as below
-	// DB_HOST  = "postgres-0.postgres.database.svc.cluster.local"
+	DB_HOST  = "postgres-0.postgres.database.svc.cluster.local"
 	DB_PORT  = 5432
 	SSL_MODE = "disable"
 )
