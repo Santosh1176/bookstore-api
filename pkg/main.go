@@ -61,7 +61,6 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "/books", http.StatusSeeOther)
 
 	commitSHA, err := getCommitSHA()
 	if err != nil {
