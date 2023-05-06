@@ -5,7 +5,6 @@ resources:
 - db/postgres-headless-svc.yaml
 - db/postgres-secret.yaml
 - db/postgres-statefulset.yaml
-- db/postgres-svc.yaml
 - db/pv.yaml
 - frontend/frontend-cm.yaml
 - frontend/frontend-depl.yaml
