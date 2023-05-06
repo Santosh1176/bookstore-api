@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index Book</title>
+    <style>
+        html, body, p {
+            padding: 0;
+            border: 0;
+            margin: 0;
+        }
+        body {
+            background-color: #DBD9D2;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        p {
+            margin-left: 4rem;
+            font-size: 2rem;
+            color: black;
+          }
+        .link {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+<img src="/image/bookstore.jpg" alt="Bookstore" style="width: 700px;height: 400px">
+
+<div><h2>Revision: {{ .CommitSHA }}</h2></div>
+
+<div><h1>Welcome to the Bookstore</h1></div>
+<h3><a href="/books">Checkout all the books</a></h3>
+
+
+
+
+</body>
+</html>
