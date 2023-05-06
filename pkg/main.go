@@ -16,9 +16,9 @@ const (
 	DB_PASS = "dts123"
 	DB_NAME = "bookstore"
 	// Change to Localhost if testing on local DB build-1
-	// DB_HOST = "localhost"
+	DB_HOST = "localhost"
 	//for build-2 localhost is as below
-	DB_HOST  = "postgres-0.postgres.database.svc.cluster.local"
+	// DB_HOST  = "postgres-0.postgres.database.svc.cluster.local"
 	DB_PORT  = 5432
 	SSL_MODE = "disable"
 )
@@ -27,11 +27,10 @@ var db *sql.DB
 var tpl *template.Template
 
 type Books struct {
-	Isbn      string
-	Title     string
-	Author    string
-	Price     float32
-	CommitSHA string
+	Isbn   string
+	Title  string
+	Author string
+	Price  float32
 }
 
 func main() {
@@ -89,7 +88,7 @@ func booksIndex(w http.ResponseWriter, r *http.Request) {
 	bks := make([]Books, 0)
 	for rows.Next() {
 		bk := Books{}
-		err := rows.Scan(&bk.Isbn, &bk.Title, &bk.Author, &bk.Price, &bk.CommitSHA)
+		err := rows.Scan(&bk.Isbn, &bk.Title, &bk.Author, &bk.Price)
 		if err != nil {
 			http.Error(w, http.StatusText(500), 500)
 			return
