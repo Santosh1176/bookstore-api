@@ -79,8 +79,6 @@ func index(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	http.Redirect(w, r, "/books", http.StatusSeeOther)
-
 }
 
 func booksIndex(w http.ResponseWriter, r *http.Request) {
