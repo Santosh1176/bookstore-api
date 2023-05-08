@@ -78,6 +78,4 @@ jobs:
       
       
       - name: Image digest
-        run: |
-          echo ${{ steps.docker_build.outputs.digest }} &&
-          echo ${{COMMIT_SHA}}
+        run: echo ${{COMMIT_SHA}}
