@@ -78,4 +78,4 @@ jobs:
       
       
       - name: Image digest
-        run: echo ${{COMMIT_SHA}}
+        run: echo $COMMIT_SHA
