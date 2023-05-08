@@ -12,6 +12,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE: santosh1176/bookstore
+      COMMIT_SHA: ${{github.sha}}
     runs-on: ubuntu-latest
     permissions:
       contents: read
