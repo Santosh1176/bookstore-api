@@ -16,7 +16,7 @@ jobs:
       registry:
         image: registry:2
         ports:
-          - 5001:5000
+          - 5000:5000
     steps:
       - uses: fluxcd/flux2/action@main
       - uses: actions/checkout@v3
@@ -52,7 +52,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: localhost:5001/santoshdts/bookstore:${{ steps.prep.outputs.LATEST_ID }}
+          tags: localhost:5000/santoshdts/bookstore:${{ steps.prep.outputs.LATEST_ID }}
 
       - name: Set commit SHA
         id: set_commit_sha
@@ -61,9 +61,9 @@ jobs:
       - name: Publish Flux OCI artifact to GHCR
         id: Push_Artifact
         run: |
-          flux push artifact oci://localhost:5001/manifests/bookstore:${{ steps.prep.outputs.VERSION }} \
+          flux push artifact oci://localhost:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} \
             --path="./kustomize" \
             --source="${{ github.event.repository.html_url }}" \
             --revision="${GITHUB_REF_NAME}/${GITHUB_SHA}"
-          flux tag artifact oci://localhost:5001/manifests/bookstore:${{ steps.prep.outputs.VERSION }} --tag latest
+          flux tag artifact oci://localhost:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} --tag latest
       
