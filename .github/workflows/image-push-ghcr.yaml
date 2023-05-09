@@ -45,7 +45,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
-          driver-opts: network=bridge
+          driver-opts: network=kind
     
 
       - name: Build and Push to Local Registry
