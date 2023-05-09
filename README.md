@@ -2,7 +2,7 @@
 
 This is my **WIP** DevOps project containing a simple REST API built with Go and a Postgres database bot deployed on a Kubernetes Kind test cluster. It also containes a frontend built with Go templates giving access to the bookstore database stored inthe Postgres db.
 
-The frontend and the backend of the application with all its dependencies are deployed on a namespace called `frontend-api` and the database with its dependencies and envVars are deployed in a different namespace namely `database`. The service can accessed through Nodeport i.e `<node IP>:<service port>/books` or using a the `ingress`. Currently, the `ingress` object is mapped to `app.santoshdts` as host. Do not forget to map the host of your choice and if its a test domain to `/etc/hosts` file. Curently, the data is persistant even after node reboots by storing the data in the `hostPath`.
+The frontend and the backend of the application with all its dependencies are deployed on a namespace called `frontend-api` and the database with its dependencies and envVars are deployed in a different namespace namely `database`. The service can accessed through Nodeport i.e `<node IP>:<service port>/books` or using a the `ingress`. Currently, the `ingress` object is mapped to `app.santoshdts` as host. Do not forget to map the host of your choice and if its a test domain to `/etc/hosts` file. The data is persistant even after node reboots by storing the data in the `hostPath`.
 
 ## TODO
 
