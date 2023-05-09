@@ -11,7 +11,6 @@ jobs:
   local:
     env:
       COMMIT_SHA: ${{github.sha}}
-      REGISTRY: kind-registry
     runs-on: ubuntu-latest
     services:
       registry:
@@ -54,7 +53,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{REGISTRY}}:5000/bookstore-api/bookstore:${{ steps.prep.outputs.LATEST_ID }}
+          tags: kind-registry:5000/bookstore-api/bookstore:${{ steps.prep.outputs.LATEST_ID }}
 
       - name: Set commit SHA
         id: set_commit_sha
@@ -63,9 +62,9 @@ jobs:
       - name: Publish Flux OCI artifact to GHCR
         id: Push_Artifact
         run: |
-          flux push artifact oci://${{REGISTRY}}:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} \
+          flux push artifact oci://kind-registry:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} \
             --path="./kustomize" \
             --source="${{ github.event.repository.html_url }}" \
             --revision="${GITHUB_REF_NAME}/${GITHUB_SHA}"
-          flux tag artifact oci://${{REGISTRY}}:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} --tag latest
+          flux tag artifact oci://kind-registry:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} --tag latest
       
