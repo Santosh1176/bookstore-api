@@ -68,8 +68,8 @@ jobs:
           flux tag artifact oci://localhost:5001/manifests/bookstore:${{ steps.prep.outputs.VERSION }} --tag latest
       
       
-      - name: Image digest
-        run: echo $COMMIT_SHA
-      - name: Inspect
-        run: |
-          docker buildx imagetools inspect localhost:5001/bookstore-api/bookstore:latest
+      # - name: Image digest
+      #   run: echo $COMMIT_SHA
+      # - name: Inspect
+      #   run: |
+      #     docker buildx imagetools inspect localhost:5001/bookstore-api/bookstore:latest
