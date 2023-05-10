@@ -75,3 +75,6 @@ jobs:
       - name: Curl
         run: |
           curl -X GET localhost:5000/v2/_catalog
+      - name: PWD
+        run: |
+          pwd
