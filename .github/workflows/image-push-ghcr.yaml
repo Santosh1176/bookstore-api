@@ -64,6 +64,7 @@ jobs:
         run: |
           flux push artifact oci://localhost:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} \
             --path="./kustomize" \
+            --insecure-skip-tls-verify= true \
             --source="${{ github.event.repository.html_url }}" \
             --revision="${GITHUB_REF_NAME}/${GITHUB_SHA}"
           flux tag artifact oci://localhost:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} --tag latest
