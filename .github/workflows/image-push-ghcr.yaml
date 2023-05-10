@@ -40,16 +40,8 @@ jobs:
           echo ::set-output name=BUILD_ID::${BUILD_ID}
           echo ::set-output name=LATEST_ID::${LATEST_ID}          
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
 
 
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-        with:
-          driver-opts: network=host
-    
 
       - name: Build and Push to Local Registry
         uses: docker/build-push-action@v4
