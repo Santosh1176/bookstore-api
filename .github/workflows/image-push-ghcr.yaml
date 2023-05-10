@@ -6,7 +6,7 @@ on:
       - '*'
     tags-ignore:
       - 'release/*'
-permissions: read-all
+permissions: write-all
 
 jobs:
   local:
@@ -71,3 +71,7 @@ jobs:
       - name: Inpsect image
         run: |
           docker buildx imagetools inspect localhost:5000/bookstore:${{ steps.prep.outputs.LATEST_ID }}
+
+      - name: Whoami
+        run: |
+          whoami
