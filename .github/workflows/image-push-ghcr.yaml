@@ -72,6 +72,6 @@ jobs:
         run: |
           docker buildx imagetools inspect localhost:5000/bookstore-api/bookstore:${{ steps.prep.outputs.LATEST_ID }}
 
-      - name: Whoami
+      - name: Curl
         run: |
-          whoami
+          curl -k localhost:5000/bookstore-api/bookstore:latest
