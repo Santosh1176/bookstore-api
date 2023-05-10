@@ -74,4 +74,4 @@ jobs:
 
       - name: Curl
         run: |
-          curl -k localhost:5000/bookstore-api/bookstore:latest
+          curl -X GET localhost:5000/v2/_catalog
