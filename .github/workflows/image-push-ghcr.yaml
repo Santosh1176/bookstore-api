@@ -70,7 +70,7 @@ jobs:
       
       - name: Inpsect image
         run: |
-          docker buildx imagetools inspect localhost:5000/bookstore:${{ steps.prep.outputs.LATEST_ID }}
+          docker buildx imagetools inspect localhost:5000/bookstore:${{ env.COMMIT_SHA}}
 
       - name: Whoami
         run: |
