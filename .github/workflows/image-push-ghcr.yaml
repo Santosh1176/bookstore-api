@@ -68,3 +68,6 @@ jobs:
             --revision="${GITHUB_REF_NAME}/${GITHUB_SHA}"
           flux tag artifact oci://localhost:5000/manifests/bookstore:${{ steps.prep.outputs.VERSION }} --tag latest
       
+      - name: Inpsect image
+        run: |
+          docker buildx imagetools inspect localhost:5000/bookstore:${{ steps.prep.outputs.LATEST_ID }}
