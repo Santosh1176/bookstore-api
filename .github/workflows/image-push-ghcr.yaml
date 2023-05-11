@@ -50,8 +50,7 @@ jobs:
         with:
           driver-opts: network=host
     
-      - name: Authenticate with Docker registry
-        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin 192.168.1.5:5000
+      
 
       - name: Build and Push to Local Registry
         uses: docker/build-push-action@v4
