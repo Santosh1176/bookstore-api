@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: localhost:5000/bookstore-api/postgres:15.2-alpine
+        image: postgres:15.2-alpine
         ports:
         - containerPort: 5432
         env:

@@ -19,7 +19,7 @@ spec:
       imagePullSecrets:
         - name: ghcr-secret
       containers:
-      - image: localhost:5000/bookstore-api/bookstore:latest
+      - image: ghcr.io/santosh1176/bookstore:latest
         name: bookstore
         imagePullPolicy: Always
         ports:
