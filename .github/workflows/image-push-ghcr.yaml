@@ -79,3 +79,6 @@ jobs:
       
       - name: Image digest
         run: echo $COMMIT_SHA
+      # - name: Metadata
+      #   run: echo ${}
+          
