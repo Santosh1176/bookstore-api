@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os"
+	"os/exec"
 	"strconv"
+	"strings"
 
 	_ "github.com/lib/pq"
 )
@@ -60,16 +61,25 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	commitSHA := os.Getenv("COMMIT_SHA")
-	fmt.Printf("COmmit SHA: %v", commitSHA)
+	commitSHA, err := getCommitSHA()
+	if err != nil {
+		http.Error(w, "Error retrieving commit SHA", http.StatusInternalServerError)
+		return
+	}
+
 	data := struct {
 		CommitSHA string
 	}{
-		CommitSHA: commitSHA, // Use the commit SHA value passed as a build argument
+		CommitSHA: commitSHA,
 	}
-	fmt.Printf("COmmit SHA: %v", data.CommitSHA)
-
 	tpl.ExecuteTemplate(w, "index.gohtml", data)
+
+	err = tpl.Execute(w, data)
+	if err != nil {
+		return
+	}
+	http.Redirect(w, r, "/books", http.StatusSeeOther)
+
 }
 
 func booksIndex(w http.ResponseWriter, r *http.Request) {
@@ -258,4 +268,17 @@ func booksDeleteProcess(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, "/books", http.StatusSeeOther)
+}
+func getCommitSHA() (string, error) {
+	cmd := exec.Command("git", "rev-parse", "--short", "HEAD")
+	output, err := cmd.Output()
+	if err != nil {
+		return "", err
+	}
+	// fmt.Printf("OUTPUT: %v", output)
+
+	commitSHA := strings.TrimSpace(string(output))
+	// fmt.Printf("COMMITSHA: %v", commitSHA)
+
+	return commitSHA, nil
 }
