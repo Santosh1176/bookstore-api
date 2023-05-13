@@ -59,20 +59,6 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
-// func getCommitSHA() (string, error) {
-// 	cmd := exec.Command("git", "rev-parse", "--short", "HEAD")
-// 	output, err := cmd.Output()
-// 	if err != nil {
-// 		return "", err
-// 	}
-// 	// fmt.Printf("OUTPUT: %v", output)
-
-// 	commitSHA := strings.TrimSpace(string(output))
-// 	fmt.Printf("COMMITSHA: %v", commitSHA)
-
-// 	return commitSHA, nil
-// }
-
 func index(w http.ResponseWriter, r *http.Request) {
 	commitSHA := os.Getenv("COMMIT_SHA")
 	fmt.Printf("CommitSHA: %v", commitSHA)
@@ -84,7 +70,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 	tpl.ExecuteTemplate(w, "index.gohtml", data)
 
-	http.Redirect(w, r, "/books", http.StatusSeeOther)
+	// http.Redirect(w, r, "/books", http.StatusSeeOther)
 
 }
 

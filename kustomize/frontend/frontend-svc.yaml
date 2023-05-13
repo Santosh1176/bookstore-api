@@ -6,7 +6,8 @@ metadata:
   labels:
     app: bookstore-frontend
 spec:
-  type: NodePort
+  type: ClusterIP
+  # type: NodePort
   ports:
     - port: 8080
       protocol: TCP
