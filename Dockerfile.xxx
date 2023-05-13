@@ -1,0 +1,15 @@
+FROM golang:1.19-alpine
+
+WORKDIR /home
+RUN apk add --no-cache git
+
+COPY ./pkg .
+
+RUN go mod download
+
+RUN  go build -o bookstore -ldflags "-X main.commitSHA=$(git rev-parse HEAD --short)"
+
+
+EXPOSE 8080
+
+CMD ["./bookstore"]
