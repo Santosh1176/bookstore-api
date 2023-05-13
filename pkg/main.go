@@ -9,9 +9,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/smartystreets/assertions/should"
-	"github.com/smartystreets/goconvey/convey"
-
 	_ "github.com/lib/pq"
 )
 
@@ -64,18 +61,23 @@ func main() {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	convey.Convey("When the index page is requested", func() {
-		commitSHA, err := getCommitSHA()
-		convey.So(err, should.BeNil)
+	commitSHA, err := getCommitSHA()
+	if err != nil {
+		http.Error(w, "Error retrieving commit SHA", http.StatusInternalServerError)
+		return
+	}
 
-		data := struct {
-			CommitSHA string
-		}{
-			CommitSHA: commitSHA,
-		}
-		convey.So(tpl.ExecuteTemplate(w, "index.gohtml", data), should.BeNil)
-	})
+	data := struct {
+		CommitSHA string
+	}{
+		CommitSHA: commitSHA,
+	}
+	tpl.ExecuteTemplate(w, "index.gohtml", data)
 
+	err = tpl.Execute(w, data)
+	if err != nil {
+		return
+	}
 	http.Redirect(w, r, "/books", http.StatusSeeOther)
 
 }
