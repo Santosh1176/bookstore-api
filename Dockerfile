@@ -6,6 +6,7 @@ COPY ./pkg .
 
 RUN go mod download
 
+RUN apk add --no-cache git
 RUN  go build -o bookstore -ldflags "-X main.commitSHA=$(git rev-parse HEAD --short)"
 
 EXPOSE 8080
@@ -15,7 +16,6 @@ FROM alpine:latest
 
 WORKDIR /root
 # COPY ./pkg/templates/. /root
-RUN apk add --no-cache git
 RUN git --version
 
 COPY --from=build /home/bookstore /root
