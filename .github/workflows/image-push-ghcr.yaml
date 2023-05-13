@@ -63,7 +63,7 @@ jobs:
         with:
           context: .
           build-args: |
-            COMMIT_SHA=${{ COMMIT_SHA }}
+            COMMIT_SHA=${{ steps.var.outputs.COMMIT_SHA }}
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE }}:${{ steps.prep.outputs.LATEST_ID }}
