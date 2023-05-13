@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os/exec"
+	"os"
 	"strconv"
-	"strings"
 
 	_ "github.com/lib/pq"
 )
@@ -59,26 +58,24 @@ func main() {
 	http.Handle("/image/", http.StripPrefix("/image", http.FileServer(http.Dir("./image"))))
 	http.ListenAndServe(":8080", nil)
 }
-func getCommitSHA() (string, error) {
-	cmd := exec.Command("git", "rev-parse", "--short", "HEAD")
-	output, err := cmd.Output()
-	if err != nil {
-		return "", err
-	}
-	// fmt.Printf("OUTPUT: %v", output)
 
-	commitSHA := strings.TrimSpace(string(output))
-	// fmt.Printf("COMMITSHA: %v", commitSHA)
+// func getCommitSHA() (string, error) {
+// 	cmd := exec.Command("git", "rev-parse", "--short", "HEAD")
+// 	output, err := cmd.Output()
+// 	if err != nil {
+// 		return "", err
+// 	}
+// 	// fmt.Printf("OUTPUT: %v", output)
 
-	return commitSHA, nil
-}
+// 	commitSHA := strings.TrimSpace(string(output))
+// 	fmt.Printf("COMMITSHA: %v", commitSHA)
+
+// 	return commitSHA, nil
+// }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	commitSHA, err := getCommitSHA()
-	if err != nil {
-		http.Error(w, "Error retrieving commit SHA", http.StatusInternalServerError)
-		return
-	}
+	commitSHA := os.Getenv("COMMIT_SHA")
+	fmt.Printf("CommitSHA: %v", commitSHA)
 
 	data := struct {
 		CommitSHA string
@@ -86,12 +83,8 @@ func index(w http.ResponseWriter, r *http.Request) {
 		CommitSHA: commitSHA,
 	}
 	tpl.ExecuteTemplate(w, "index.gohtml", data)
-	fmt.Printf("CommitSHA: %v", commitSHA)
-	err = tpl.Execute(w, data)
-	if err != nil {
-		return
-	}
-	// http.Redirect(w, r, "/books", http.StatusSeeOther)
+
+	http.Redirect(w, r, "/books", http.StatusSeeOther)
 
 }
 
