@@ -59,6 +59,19 @@ func main() {
 	http.Handle("/image/", http.StripPrefix("/image", http.FileServer(http.Dir("./image"))))
 	http.ListenAndServe(":8080", nil)
 }
+func getCommitSHA() (string, error) {
+	cmd := exec.Command("git", "rev-parse", "--short", "HEAD")
+	output, err := cmd.Output()
+	if err != nil {
+		return "", err
+	}
+	// fmt.Printf("OUTPUT: %v", output)
+
+	commitSHA := strings.TrimSpace(string(output))
+	// fmt.Printf("COMMITSHA: %v", commitSHA)
+
+	return commitSHA, nil
+}
 
 func index(w http.ResponseWriter, r *http.Request) {
 	commitSHA, err := getCommitSHA()
@@ -268,17 +281,4 @@ func booksDeleteProcess(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, "/books", http.StatusSeeOther)
-}
-func getCommitSHA() (string, error) {
-	cmd := exec.Command("git", "rev-parse", "--short", "HEAD")
-	output, err := cmd.Output()
-	if err != nil {
-		return "", err
-	}
-	// fmt.Printf("OUTPUT: %v", output)
-
-	commitSHA := strings.TrimSpace(string(output))
-	// fmt.Printf("COMMITSHA: %v", commitSHA)
-
-	return commitSHA, nil
 }
