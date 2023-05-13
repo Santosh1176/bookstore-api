@@ -73,7 +73,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		CommitSHA: commitSHA,
 	}
 	tpl.ExecuteTemplate(w, "index.gohtml", data)
-
+	fmt.Printf("CommitSHA: %v", commitSHA)
 	err = tpl.Execute(w, data)
 	if err != nil {
 		return
