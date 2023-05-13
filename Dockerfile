@@ -1,10 +1,10 @@
 FROM golang:1.19-alpine AS build
 
 WORKDIR /home
+RUN apk add --no-cache git
 
 COPY ./pkg .
 
-RUN apk add --no-cache git
 RUN go mod download
 
 RUN  go build -o bookstore -ldflags "-X main.commitSHA=$(git rev-parse HEAD --short)"
