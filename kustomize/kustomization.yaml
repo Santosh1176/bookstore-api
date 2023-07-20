@@ -10,4 +10,4 @@ resources:
 - frontend/frontend-depl.yaml
 - frontend/frontend-secret.yaml
 - frontend/frontend-svc.yaml
-- frontend/ingress.yaml
+
