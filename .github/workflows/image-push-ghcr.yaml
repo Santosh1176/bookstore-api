@@ -51,8 +51,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT }}
-      
+          password: ${{ secrets.GITHUB_TOKEN }}    
       - name: Set commit SHA
         id: set_commit_sha
         run: echo "::set-output name=COMMIT_SHA::$(git rev-parse --short HEAD)"
