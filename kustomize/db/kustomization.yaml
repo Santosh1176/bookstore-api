@@ -7,3 +7,4 @@ resources:
 - postgres-headless-svc.yaml
 - pv.yaml
 - postgres-secret.yaml
+- database-ns.yaml
