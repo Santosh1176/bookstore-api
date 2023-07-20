@@ -17,6 +17,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
     steps:
       - uses: fluxcd/flux2/action@main
       - uses: actions/checkout@v3
