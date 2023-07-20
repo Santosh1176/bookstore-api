@@ -7,4 +7,4 @@ resources:
 - frontend-secret.yaml
 - frontend-svc.yaml
 - ingress.yaml
-- frontend-api.yaml
+- frontend-ns.yaml
